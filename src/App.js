@@ -10,7 +10,11 @@ function App() {
 
   const obtenerCoordenadas = async (direccion) => {
     const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(direccion)}`;
-    const response = await axios.get(url);
+    const response = await axios.get(url, {
+      headers: {
+        'User-Agent': 'MiAppPosicionamiento/1.0'
+      }
+    });
     if (response.data.length > 0) {
       const { lat, lon } = response.data[0];
       return { lat, lon };
